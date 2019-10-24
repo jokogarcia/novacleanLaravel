@@ -205,7 +205,7 @@ class UserController extends Controller
     }
     public function ApiHome(){
         $userId = Auth()->user()->id;
-        $fullUser = App\User::with('Locations')->find($userId);
+        $fullUser = \App\User::with('Locations')->find($userId);
         return $fullUser;
         
     }

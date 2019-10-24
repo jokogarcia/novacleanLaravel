@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     //
+    protected $with = ['Sectors', 'City', 'Supervisor','VisitEvents'];
     protected $guarded=['id'];
     public function Client(){
         return $this->belongsTo("App\User","client_id");

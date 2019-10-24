@@ -35,6 +35,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    protected $with = ['UserRole', 'City'];
     
     public function WorkExperiences(){
         return $this->hasMany('App\WorkExperience');

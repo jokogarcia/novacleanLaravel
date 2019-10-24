@@ -18,15 +18,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('/login','Auth\LoginController@ApiLogin');
 Route::post('/logout','Auth\LoginController@ApiLogout');
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::get('/visit_events/{visitEvent}','VisitEventController@ApiShow');
 
-Route::get('/visit_events/{visitEvent}','VisitEventController@ApiShow');
+    Route::get('employees/{user}','UserController@ApiShowEmployee');
+    Route::get('home','UserController@ApiHome');
 
-Route::get('employees/{user}','UserController@ApiShowEmployee');
-Route::get('home','UserController@ApiHome');
+    Route::post('complaints/','ComplaintController@ApiStore');
+    Route::post('raitings/','RaitingsController@ApiStore');
 
-Route::post('complaints/','ComplaintController@ApiStore');
-Route::post('raitings/','RaitingsController@ApiStore');
+    Route::get('locations/{location}','LocationController@ApiShow');
+});
 
-Route::get('locations/{location}','LocationController@ApiShow');
 
 
