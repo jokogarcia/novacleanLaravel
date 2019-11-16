@@ -49,7 +49,7 @@ class WorkExperienceController extends Controller
             'company_name'          =>  'required | string',
             'position'              =>  'required | string',
             'started_at'            =>  'required | date',
-            'finished_at'           =>  'date | after:started_at',
+            'finished_at'           =>  'nullable | sometimes | date | after:started_at',
             'is_current_job'        =>  'boolean',
             'reference_name'        =>  'string',
             'reference_email'       =>  'string',
@@ -58,7 +58,7 @@ class WorkExperienceController extends Controller
             
         ]);
        
-        WorkExperience::create(request([
+        $we = WorkExperience::create(request([
             'company_name',
             'position',
             'started_at',
@@ -69,7 +69,11 @@ class WorkExperienceController extends Controller
             'reference_email',
             'user_id'
         ]));
-        return redirect('/users/'.auth()->id());
+        if (auth()->user()->UserRole->role == "ADMIN") {
+            return redirect('/users/' . $we->user_id);
+        } else {
+            return redirect('/home');
+        }
     }
 
     /**

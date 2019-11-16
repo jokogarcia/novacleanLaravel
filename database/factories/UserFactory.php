@@ -47,7 +47,7 @@ $factory->state(User::class,'client',[
 $factory->state(User::class,'employee',function ($faker){
         return[
             'user_role_id' => 3,
-            'employee_start_date'=>$faker->date
+            
             
     ];
         
@@ -56,7 +56,6 @@ $factory->state(User::class,'employee',function ($faker){
 $factory->state(User::class,'supervisor',function ($faker){
         return[
             'user_role_id' => 4,
-            'employee_start_date'=>$faker->date
             
     ];
         
@@ -65,7 +64,6 @@ $factory->state(User::class,'supervisor',function ($faker){
 $factory->state(User::class,'admin',function ($faker){
         return[
             'user_role_id' => 5,
-            'employee_start_date'=>$faker->date,
             'email' => 'admin@example.com'
             
     ];

@@ -54,7 +54,6 @@
         <input name="area"
           type='number'  step='0.01'
           class="input wide @error('area') is-error @enderror"
-          required
           value="{{old('area')}}"
         />
         @error('area')

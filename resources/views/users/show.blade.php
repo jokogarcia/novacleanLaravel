@@ -32,6 +32,11 @@
             </div>
         </div>
     </section>
+    @if($user->UserRole->role == "EMPLOYEE" || $user->UserRole->role == "SUPERVISOR")
+    
+    @component('components.EmployeeStatisticsComponent',['user'=>$user])
+                @endcomponent
+    @endif
     @if($user->UserRole->role == "EMPLOYEE" || $user->UserRole->role == "GUEST")
     <section id='resume'>
         <hr>
@@ -78,7 +83,9 @@
                    <div class="title"><h2>&nbsp;</h2></div>
                </div>
                <div class="col-md-8">
+                   @if(auth()->user()->UserRole->role == "EMPLOYEE" || auth()->user()->UserRole->role == "GUEST")
                    <p><a href='/academic_experiences/create'>Agregar nuevo</a></p>
+                   @endif
                </div>
            </div>
             </div>
@@ -122,15 +129,52 @@
             <p>Sin datos</p>
             @endforelse
             <div class="row">
-                <div class="col-md-2">
-                    <div class="title"><h2>&nbsp;</h2></div>
-                </div>
-                <div class="col-md-8">
-                    <p><a href='/work_experiences/create'>Agregar nueva</a></p>
-                </div>
+               <div class="col-md-2">
+                   <div class="title"><h2>&nbsp;</h2></div>
+               </div>
+               <div class="col-md-8">
+                   @if(auth()->user()->UserRole->role == "EMPLOYEE" || auth()->user()->UserRole->role == "GUEST")
+                   <p><a href='/work_experiences/create'>Agregar nuevo</a></p>
+                   @endif
+               </div>
+           </div>
             </div>
+            <hr>
 
     </section>
+    <section id='complaints'>
+        <div class='container'>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="title"><h2>Reclamos</h2></div>
+                </div>
+            </div>
+            
+            
+            @forelse($user->Complaints as $complaint)
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="title"><h2><img src="{{$complaint->getPhotoURL()}}"/></h2></div>
+                </div>
+                <div class="col-md-8">
+                    <p><strong>Cliente: </strong>{{$complaint->Client->getNameWithLink()}}</p>
+                    <p><strong>Lugar: </strong>{{$complaint->Location->getNameWithLink()}}</p>
+                    <p><strong>Tipo de reclamo: </strong>{{$complaint->getTyppe()}}</p>
+                    <p><strong>Comentario: </strong>{{$complaint->comment}}</p>
+                    <p><strong>Fecha del evento: </strong>{{$complaint->reference_date}}</p>
+                    <p><strong>Fecha del reclamo: </strong>{{$complaint->created_at}}</p>
+                    </div>
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+            </div>
+            <hr/>
+            @empty
+            <p>Sin datos</p>
+            @endforelse
+            
+            
+    
     @elseif($user->UserRole->role == "CLIENT")
     <section id='locations'>
         <hr>

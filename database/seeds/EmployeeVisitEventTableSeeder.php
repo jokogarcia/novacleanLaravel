@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class EmployeeComplaintTableSeeder extends Seeder
+class EmployeeVisitEventTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,14 +11,14 @@ class EmployeeComplaintTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('employee_complaint')->delete();
+        DB::table('employee_visit_event')->delete();
         $array = [];
-        for($i=0;$i<50;$i++){
+        for($i=0;$i<200;$i++){
             array_push($array,
                     ['employee_id' => rand(12,21),
-                     'complaint_id' => rand(1,50)   
+                     'visit_event_id' => rand(1,100)   
                         ]);
         }
-        DB::table('employee_complaint')->insert($array);
+        DB::table('employee_visit_event')->insert($array);
     }
 }

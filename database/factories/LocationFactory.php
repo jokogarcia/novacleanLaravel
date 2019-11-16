@@ -13,6 +13,7 @@ $factory->define(Location::class, function (Faker $faker) {
         'address_street_name'=>$faker->streetName,
         'address_street_number' => $faker->numberBetween(50,1500),
         'address_floor' => $faker->numberBetween(0,10),
+        'phone_number' => $faker->phoneNumber,
         'address_appartment' => $faker->numberBetween(1,7),
         'latitude'=>100/ $faker->numberBetween(1000,10000) - 26.541,
         'longitude'=>100/ $faker->numberBetween(1000,10000) - 64.541,

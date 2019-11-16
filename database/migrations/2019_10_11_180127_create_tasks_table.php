@@ -16,9 +16,9 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->bigInteger("sector_id")->unsigned();
-            $table->foreign('sector_id')->references('id')->on('sectors');
+            $table->foreign('sector_id')->references('id')->on('sectors')->onDelete("cascade");
             $table->time("duration")->nullable();
-            $table->integer("frecuency");
+            $table->integer("frequency");
             $table->text("description");
             $table->timestamps();
         });

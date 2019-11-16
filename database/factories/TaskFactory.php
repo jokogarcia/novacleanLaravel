@@ -3,7 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory 
  $table->bigInteger("sector_id");
             $table->time("duration");
-            $table->integer("frecuency");
+            $table->integer("frequency");
             $table->text("description");
  *  */
 
@@ -15,7 +15,7 @@ $factory->define(Task::class, function (Faker $faker) {
         //
         'sector_id' => $faker->numberBetween(1,100),
         'duration'=> $faker->time(),
-        'frecuency' => $faker->numberBetween(1,30),
+        'frequency' => $faker->numberBetween(1,30),
         'description'=>$faker->text,
     ];
 });

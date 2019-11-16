@@ -11,6 +11,11 @@ class Task extends Model
     public function Sector(){
         return $this->belongsTo('App\Sector');
     }
+    public function VisitEvents(){
+        return $this->belongsToMany('App\VisitEvent');
+    }
+   
+    
     
 }
 

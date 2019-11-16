@@ -32,27 +32,27 @@
 
 
 <div class="form-group">
-    <label class="label text-black" for ="frecuency">Frecuencia</label>
+    <label class="label text-black" for ="frequency">Frecuencia</label>
     <div class="control">
-        <select name='frecuency'>
-            <option value ='1' @if($task->frecuency == 1) SELECTED @endif >Una vez por mes</option>
-            <option value ='2' @if($task->frecuency == 2) SELECTED @endif >Quincenal</option>
-            <option value ='3' @if($task->frecuency == 3) SELECTED @endif >Tres veces por mes</option>
-            <option value ='4' @if($task->frecuency == 4) SELECTED @endif >Semanal</option>
-            <option value ='5' @if($task->frecuency == 5) SELECTED @endif >Cinco veces por mes</option>
-            <option value ='6' @if($task->frecuency == 6) SELECTED @endif >Seis veces por mes</option>
-            <option value ='7' @if($task->frecuency == 7) SELECTED @endif >Siete veces por mes</option>
-            <option value ='8' @if($task->frecuency == 8) SELECTED @endif >Dos veces por semana</option>
-            <option value ='12' @if($task->frecuency == 12) SELECTED @endif >Tres veces por semana</option>
-            <option value ='16' @if($task->frecuency == 16) SELECTED @endif >Cuatro veces por semana</option>
-            <option value ='20' @if($task->frecuency == 20) SELECTED @endif >Lunes a Viernes</option>
-            <option value ='24' @if($task->frecuency == 24) SELECTED @endif >Lunes a Sábado</option>
-            <option value ='30' @if($task->frecuency == 30) SELECTED @endif >Lunes a Domingo</option>
+        <select name='frequency'>
+            <option value ='1' @if($task->frequency == 1) SELECTED @endif >Una vez por mes</option>
+            <option value ='2' @if($task->frequency == 2) SELECTED @endif >Quincenal</option>
+            <option value ='3' @if($task->frequency == 3) SELECTED @endif >Tres veces por mes</option>
+            <option value ='4' @if($task->frequency == 4) SELECTED @endif >Semanal</option>
+            <option value ='5' @if($task->frequency == 5) SELECTED @endif >Cinco veces por mes</option>
+            <option value ='6' @if($task->frequency == 6) SELECTED @endif >Seis veces por mes</option>
+            <option value ='7' @if($task->frequency == 7) SELECTED @endif >Siete veces por mes</option>
+            <option value ='8' @if($task->frequency == 8) SELECTED @endif >Dos veces por semana</option>
+            <option value ='12' @if($task->frequency == 12) SELECTED @endif >Tres veces por semana</option>
+            <option value ='16' @if($task->frequency == 16) SELECTED @endif >Cuatro veces por semana</option>
+            <option value ='20' @if($task->frequency == 20) SELECTED @endif >Lunes a Viernes</option>
+            <option value ='24' @if($task->frequency == 24) SELECTED @endif >Lunes a Sábado</option>
+            <option value ='30' @if($task->frequency == 30) SELECTED @endif >Lunes a Domingo</option>
             
         </select>
-        @error('frecuency')
+        @error('frequency')
         <p class='help is-danger'>
-            {{$errors->first('frecuency')}}
+            {{$errors->first('frequency')}}
         </p>
         @enderror
     </div>

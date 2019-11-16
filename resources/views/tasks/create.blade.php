@@ -34,27 +34,27 @@
 
 
 <div class="form-group">
-    <label class="label text-black" for ="frecuency">Frecuencia</label>
+    <label class="label text-black" for ="frequency">Frecuencia</label>
     <div class="control">
-        <select name='frecuency'>
-            <option value ='1' @if(old('frecuency') == 1) SELECTED @endif >Una vez por mes</option>
-            <option value ='2' @if(old('frecuency') == 2) SELECTED @endif >Quincenal</option>
-            <option value ='3' @if(old('frecuency') == 3) SELECTED @endif >Tres veces por mes</option>
-            <option value ='4' @if(old('frecuency') == 4) SELECTED @endif >Semanal</option>
-            <option value ='5' @if(old('frecuency') == 5) SELECTED @endif >Cinco veces por mes</option>
-            <option value ='6' @if(old('frecuency') == 6) SELECTED @endif >Seis veces por mes</option>
-            <option value ='7' @if(old('frecuency') == 7) SELECTED @endif >Siete veces por mes</option>
-            <option value ='8' @if(old('frecuency') == 8) SELECTED @endif >Dos veces por semana</option>
-            <option value ='12' @if(old('frecuency') == 12) SELECTED @endif >Tres veces por semana</option>
-            <option value ='16' @if(old('frecuency') == 16) SELECTED @endif >Cuatro veces por semana</option>
-            <option value ='20' @if(old('frecuency') == 20) SELECTED @endif >Lunes a Viernes</option>
-            <option value ='24' @if(old('frecuency') == 24) SELECTED @endif >Lunes a Sábado</option>
-            <option value ='30' @if(old('frecuency') == 30) SELECTED @endif >Lunes a Domingo</option>
+        <select name='frequency'>
+            <option value ='1' @if(old('frequency') == 1) SELECTED @endif >Una vez por mes</option>
+            <option value ='2' @if(old('frequency') == 2) SELECTED @endif >Quincenal</option>
+            <option value ='3' @if(old('frequency') == 3) SELECTED @endif >Tres veces por mes</option>
+            <option value ='4' @if(old('frequency') == 4) SELECTED @endif >Semanal</option>
+            <option value ='5' @if(old('frequency') == 5) SELECTED @endif >Cinco veces por mes</option>
+            <option value ='6' @if(old('frequency') == 6) SELECTED @endif >Seis veces por mes</option>
+            <option value ='7' @if(old('frequency') == 7) SELECTED @endif >Siete veces por mes</option>
+            <option value ='8' @if(old('frequency') == 8) SELECTED @endif >Dos veces por semana</option>
+            <option value ='12' @if(old('frequency') == 12) SELECTED @endif >Tres veces por semana</option>
+            <option value ='16' @if(old('frequency') == 16) SELECTED @endif >Cuatro veces por semana</option>
+            <option value ='20' @if(old('frequency') == 20) SELECTED @endif >Lunes a Viernes</option>
+            <option value ='24' @if(old('frequency') == 24) SELECTED @endif >Lunes a Sábado</option>
+            <option value ='30' @if(old('frequency') == 30) SELECTED @endif >Lunes a Domingo</option>
             
         </select>
-        @error('frecuency')
+        @error('frequency')
         <p class='help is-danger'>
-            {{$errors->first('frecuency')}}
+            {{$errors->first('frequency')}}
         </p>
         @enderror
     </div>

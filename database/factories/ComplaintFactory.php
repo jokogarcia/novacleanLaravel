@@ -16,7 +16,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Complaint::class, function (Faker $faker) {
     return [
-        'client_id' => $faker->numberBetween(31,41),
+        'client_id' => $faker->numberBetween(1,10),
         'visit_event_id' => $faker->numberBetween(1,50),
         'comment' => $faker->text,
         'reference_date'=>$faker->date(),

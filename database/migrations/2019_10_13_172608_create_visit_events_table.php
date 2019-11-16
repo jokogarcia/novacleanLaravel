@@ -16,7 +16,7 @@ class CreateVisitEventsTable extends Migration
         Schema::create('visit_events', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->bigInteger("location_id")->unsigned();
-            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete("cascade");
             $table->time("starts_at");
             $table->time("duration");
             $table->date("date")->nullable();

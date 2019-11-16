@@ -16,9 +16,9 @@ class CreateEmployeeComplaintTable extends Migration
         Schema::create('employee_complaint', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->bigInteger('employee_id')->unsigned();
-            $table->foreign('employee_id')->references('id')->on('users');
+            $table->foreign('employee_id')->references('id')->on('users')->onDelete("cascade");
             $table->bigInteger('complaint_id')->unsigned();
-            $table->foreign('complaint_id')->references('id')->on('complaints');
+            $table->foreign('complaint_id')->references('id')->on('complaints')->onDelete("cascade");
             $table->timestamps();
         });
     }

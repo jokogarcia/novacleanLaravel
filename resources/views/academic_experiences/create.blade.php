@@ -81,6 +81,7 @@
                        type="date"
                        name="finished_at"
                        value="{{old('finished_at')}}"/>
+                @error('finished_at') <p class='help is-danger'>{{$errors->first('finished_at')}}</p> @enderror
             </div>
         </div>
         <div class="form-group">
@@ -107,6 +108,7 @@
         
         
     </form>
+    
     
 </div>
 

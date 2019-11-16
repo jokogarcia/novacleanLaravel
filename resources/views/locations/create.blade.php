@@ -143,7 +143,7 @@
         <input name="local_contact_name"
           type='text'
           class="input wide @error('local_contact_name') is-error @enderror"
-          
+          required
           value="{{old('local_contact_name')}}"
         />
         @error('local_contact_name')
@@ -213,6 +213,7 @@
     <label class="label text-black" for ="supervisor_id">Supervisor</label>
     <div class="control">
         <select name='supervisor_id'>
+            required
             @foreach(App\User::all() as $user)
             @if($user->UserRole->role == "SUPERVISOR")
             <option value="{{$user->id}}"

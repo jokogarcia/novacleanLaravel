@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Complaint;
+use App\Raiting;
 use Illuminate\Http\Request;
 
-class ComplaintController extends Controller
+class RaitingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,45 +33,34 @@ class ComplaintController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function ApiStore(Request $request)
     {
         //
+         //
         $request->validate([
-            'client_id'             =>  'required | numeric',
             'visit_event_id'        =>  'required | numeric',
-            'comment'               =>  'string',
             'reference_date'        =>  'required | date',
-            'complaint_type'        =>  'required | numeric',
+            'raiting'               =>  'required | numeric',
             
         ]);
-        
-        $complaint = App\Complaint::create(request([
+        $request['client_id']= auth()->id();
+        $raiting=\App\Raiting::create(request([
             'client_id',
             'visit_event_id',
-            'comment',
             'reference_date',
-            'complaint_type'
+            'raiting'
         ]));
-        $_id = $complaint->id;
-        if($request->has('photo')){
-            $image = $request->file('photo');
-            $name = "Complaint$_id";
-            $folder = "/images/complaints/";
-            $filePath = "$folder$name.".$image->getClientOriginalExtension();
-            $this->uploadOne($image,$folder,'public',$name);
-            $request['photo_url'] = $filePath;
-        }
-        $complaint->update(request(['photo_url']));
-        return $complaint;
+        return $raiting;
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Complaint  $complaint
+     * @param  \App\Raiting  $raiting
      * @return \Illuminate\Http\Response
      */
-    public function show(Complaint $complaint)
+    public function show(Raiting $raiting)
     {
         //
     }
@@ -79,10 +68,10 @@ class ComplaintController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Complaint  $complaint
+     * @param  \App\Raiting  $raiting
      * @return \Illuminate\Http\Response
      */
-    public function edit(Complaint $complaint)
+    public function edit(Raiting $raiting)
     {
         //
     }
@@ -91,10 +80,10 @@ class ComplaintController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Complaint  $complaint
+     * @param  \App\Raiting  $raiting
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Complaint $complaint)
+    public function update(Request $request, Raiting $raiting)
     {
         //
     }
@@ -102,10 +91,10 @@ class ComplaintController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Complaint  $complaint
+     * @param  \App\Raiting  $raiting
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Complaint $complaint)
+    public function destroy(Raiting $raiting)
     {
         //
     }

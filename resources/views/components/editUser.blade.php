@@ -51,7 +51,7 @@
             @enderror
         </div>
     </div>
-
+        
 
     <div class="form-group">
         <label class="label text-black" for ="email">Email</label>
@@ -117,6 +117,43 @@
             @enderror
         </div>
     </div>
+    @if ($user->UserRole->role =='EMPLOYEE' ||
+        $user->UserRole->role =='SUPERVISOR' ||
+        $user->UserRole->role =='ADMIN')
+        
+        <div class="form-group">
+            <label class="label text-black" for ="birth_date">Fecha de Nacimiento</label>
+            <div class="control">
+                <input name="birth_date"
+                  type='date'
+                  class="input wide @error('birth_date') is-error @enderror"
+                  value="{{$user->birth_date}}"
+                />
+                @error('birth_date')
+                <p class='help is-danger'>
+                    {{$errors->first('birth_date')}}
+                </p>
+                @enderror
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="label text-black" for ="employee_start_date">Fecha de alta</label>
+            <div class="control">
+                <input name="employee_start_date"
+                  type='date'
+                  class="input wide @error('employee_start_date') is-error @enderror"
+                  value="{{$user->employee_start_date}}"
+                />
+                @error('employee_start_date')
+                <p class='help is-danger'>
+                    {{$errors->first('employee_start_date')}}
+                </p>
+                @enderror
+            </div>
+        </div>
+        
+    @endif
         <input type='hidden' name='redirectTo' value='{{$redirectTo ?? ''}}'>
         <input type="submit" value="Enviar Cambios"/>
 

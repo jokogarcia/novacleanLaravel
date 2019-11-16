@@ -8,7 +8,7 @@ $userAuth = \App\User::with("UserRole")->find(auth()->id());
 
 
 if($user==null){
-    $user = \App\User::with("UserRole")->find(auth()->id());
+    $user = auth()->user();
 } else if ($user->id != $userAuth->id && $userAuth->UserRole->role != "ADMIN") {
     dd("abort(403)");
 } else {

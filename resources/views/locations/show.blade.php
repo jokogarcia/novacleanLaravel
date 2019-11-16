@@ -20,7 +20,7 @@
                         {{$location->fullAddress()}}
                     </p>
                    
-                    <p><strong>Latitude</strong> {{$location->latitude}}<strong style="margin-left: 25px">Longitude</strong> {{$location->longitude}}</p>
+                    <p><strong>Latitud</strong> {{$location->latitude}}<strong style="margin-left: 25px">Longitud</strong> {{$location->longitude}}</p>
                     <p><strong>Contacto local:</strong></p>
                     <p style="margin-left: 25px">{{$location->local_contact_name}}</p>
                     <p style="margin-left: 25px"><strong>Email: </strong><a href='mailto:{{$location->local_contact_email}}'>{{$location->local_contact_email}}</a></p>
@@ -105,6 +105,7 @@
            
         </div>
     </section>
+    
 
 </div>
 @endsection

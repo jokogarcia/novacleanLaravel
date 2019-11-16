@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateComplaintsTable extends Migration
+class CreateRaitingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateComplaintsTable extends Migration
      */
     public function up()
     {
-        Schema::create('complaints', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned();
-            $table->string('photo_url')->nullable();
-            $table->bigInteger('client_id')->unsigned();
-            $table->foreign('client_id')->references('id')->on('users')->onDelete("cascade");
+        Schema::create('raitings', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('visit_event_id')->unsigned();
             $table->foreign('visit_event_id')->references('id')->on('visit_events')->onDelete("cascade");
-            $table->text('comment')->nullable();
+
+            $table->bigInteger('client_id')->unsigned();
+            $table->foreign('client_id')->references('id')->on('users')->onDelete("cascade");
+
             $table->date('reference_date');
-            $table->tinyInteger('complaint_type');
+            $table->float('raiting');
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ class CreateComplaintsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('complaints');
+        Schema::dropIfExists('raitings');
     }
 }

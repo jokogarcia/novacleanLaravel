@@ -23,7 +23,7 @@ class CreateAcademicExperiencesTable extends Migration
             $table->date("finished_at")->nullable();
             $table->boolean("is_current")->default(false);
             $table->bigInteger("user_id")->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
             $table->timestamps();
         });
     }

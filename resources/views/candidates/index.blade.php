@@ -43,7 +43,8 @@ function getAge($birthDate){
                     </td>
                     <td>{{getAge($user->birth_date)}}</td>
                     <td>
-                        <a href="/users/{{$user->id}}">ver</a> 
+                        <a href="/users/{{$user->id}}">ver</a>
+                        <form action="/users/{{$user->id}}" method="POST">@csrf  {{method_field('DELETE')}} <input type="hidden" value="/candidates" name="redirectTo"/><button type="submit">Eliminar</button></form>
                     </td>
                 </tr>
             @empty

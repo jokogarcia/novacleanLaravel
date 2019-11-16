@@ -30,10 +30,10 @@ class CreateLocationsTable extends Migration
             $table->string("local_contact_email")->nullable();
             $table->string("local_contact_phone")->nullable();
             $table->string("contract_number")->nullable();
-            $table->bigInteger("supervisor_id")->unsigned();
-            $table->foreign('supervisor_id')->references('id')->on('users');
+            $table->bigInteger("supervisor_id")->unsigned()->nullable();
+            $table->foreign('supervisor_id')->references('id')->on('users')->onDelete("set null");
             $table->bigInteger("client_id")->unsigned();
-            $table->foreign('client_id')->references('id')->on('users');
+            $table->foreign('client_id')->references('id')->on('users')->onDelete("cascade");
 
             $table->timestamps();
         });

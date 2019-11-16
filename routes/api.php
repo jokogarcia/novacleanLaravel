@@ -25,7 +25,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('home','UserController@ApiHome');
 
     Route::post('complaints/','ComplaintController@ApiStore');
-    Route::post('raitings/','RaitingsController@ApiStore');
+    Route::post('raitings/','RaitingController@ApiStore');
 
     Route::get('locations/{location}','LocationController@ApiShow');
 });

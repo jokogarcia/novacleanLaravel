@@ -35,6 +35,16 @@ class UserController extends Controller
         //
         return view('/users/create');
     }
+    public function clientCreate()
+    {
+        //
+        return view('/clients/create');
+    }
+    public function employeeCreate()
+    {
+        //
+        return view('/employees/create');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -45,33 +55,49 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        
         auth()->user()->hasAnyRole(['ADMIN','SUPERVISOR']);
         $request->validate([
-            'name'           =>  'required | string',
-            'last_name'      =>  'string',
-            'email'          =>  'string | unique:users,email',
+            'name'          =>  'required | string',
+            'last_name'     =>  'string',
+            'email'         =>  'string | unique:users,email',
+            'password'      =>  'string | required',
             'dni'           =>  'unique:users,dni| numeric',
-            'phone'           =>  'string',
-            'cuit'          => 'numeric | unique:users,cuit',
-            'employee_start_date'   =>  'date',
+            'phone'         =>  'string',
+            'cuit'          =>  'numeric | unique:users,cuit',
+            'user_role_id' =>  'numeric',
+            'employee_start_date'   =>  'nullable | somteimes | date',
             'birth_date'    =>  'date',
             'tcn_state'     =>  'boolean',
-            'city_id'       =>  'required | numeric'
+            'city_id'       =>  'required | numeric',
+            'photo'         =>  'image | mimes:jpeg,png,jpg,gif|max:2048'
             
         ]);
-
-        App\User::create(request([
+        
+        $request['password'] = bcrypt($request['password']);
+       $newuser = \App\User::create(request([
             'name',
             'last_name',
             'email',
+            'password',
             'dni',
             'cuit',
             'phone',
             'birth_date',
             'employee_start_date',
-            'city_id'
+            'city_id',
+            'user_role_id',
         ]));
-        return redirect('/home');
+       if($request->has('photo')){
+            $image = $request->file('photo');
+            $name = "User$newuser->id";
+            $folder = "/images/users/";
+            $filePath = "$folder$name.".$image->getClientOriginalExtension();
+            $this->uploadOne($image,$folder,'public',$name);
+            $request['photo_url'] = $filePath;
+        }
+        $newuser->update(request(['photo_url']));
+        return redirect('/users/'.$newuser->id);
     }
 
     /**
@@ -124,7 +150,7 @@ class UserController extends Controller
             'dni'           =>  "unique:users,dni,$_id",
             'phone'           =>  'string',
             'cuit'          => "unique:users,cuit,$_id",
-            'employee_start_date'   =>  'date',
+            'employee_start_date'   =>  'nullable | somteimes | date',
             'birth_date'    =>  'date',
             'city_id'       =>  'required | numeric',
             'photo'         =>  'image | mimes:jpeg,png,jpg,gif|max:2048'
@@ -139,9 +165,7 @@ class UserController extends Controller
             $this->uploadOne($image,$folder,'public',$name);
             $request['photo_url'] = $filePath;
         }
-        else{
-            dd($request);
-        }
+        
         $user->update(request([
             'name',
             'last_name',
@@ -172,13 +196,14 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy( User $user,Request $request)
     {
          //check if user is logged in and is administrator
         auth()->user()->hasAnyRole(['ADMIN']);
         
         $user->delete();
-        
+        $redirectURL =$request["redirectTo"];
+        return redirect($redirectURL);
         
     }
     

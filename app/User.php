@@ -80,4 +80,7 @@ class User extends Authenticatable
         else
             return "/images/users/no-photo.jpg";
     }
+    public function getNameWithLink(){
+        return "<a href='/users/$this->id'>$this->last_name,$this->name</a>";
+    }
 }

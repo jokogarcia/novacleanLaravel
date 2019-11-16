@@ -4,9 +4,10 @@
 
 <div class="container">
     <section id="dashboard">
+        <a href="/employees/create">Cargar nuevo empleado</a>
         <table class="table">
             <tr>
-                <th>Cliente</th>
+                <th>Empleado</th>
                 <th>Tipo</th>
                 <th>Email</th>
                 <th>Teléfono</th>
@@ -25,10 +26,12 @@
                     <td>
                         <a href="/users/{{$user->id}}/edit">editar</a> | 
                         <a href="/users/{{$user->id}}">ver</a> 
+                        <form action="/users/{{$user->id}}" method="POST">@csrf  {{method_field('DELETE')}} <input type="hidden" value="/employees" name="redirectTo"/><button type="submit">Eliminar</button></form>
+                        
                     </td>
                 </tr>
             @empty
-                <p>No hay clientes</p>
+                <p>No hay empleados</p>
             @endforelse
         </table>
     </section>

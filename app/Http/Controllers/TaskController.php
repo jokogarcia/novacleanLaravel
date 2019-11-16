@@ -33,14 +33,14 @@ class TaskController extends Controller
         auth()->user()->hasAnyRole(['ADMIN','SUPERVISOR']);
         $request->validate([
             'description'           =>  'required | string',
-            'duration'              =>  'time',
+            'duration'              =>  'date_format:H:i',
             'frequency'             =>  'numeric | required',
             'sector_id'           =>  'required | numeric',
         ]);
         $task=\App\Task::create(request([
             'description',
             'duration',
-            'frecuency',
+            'frequency',
             'sector_id',
         ]));
         
@@ -82,13 +82,13 @@ class TaskController extends Controller
         auth()->user()->hasAnyRole(['ADMIN','SUPERVISOR']);
                 $request->validate([
             'description'           =>  'required | string',
-            'duration'              =>  'time',
+            'duration'              =>  'date_format:H:i',
             'frequency'             =>  'numeric | required',
         ]);
         $task->update(request([
             'description',
             'duration',
-            'frecuency',
+            'frequency',
         ]));
         return redirect('/locations/'.$task->Sector->location_id."#sector".$task->Sector->id);
     }

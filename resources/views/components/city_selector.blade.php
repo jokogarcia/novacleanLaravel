@@ -1,4 +1,8 @@
-<?php
+/*
+Agregar opcion ordenar alfabeticamente
+y campo condicion impositiva
+hacer que tome la localidad del cliente al crear lugar
+*/<?php
 $selected_city_id = $selected_city_id == null ? 1 : $selected_city_id;
 $selectedCity = App\City::find($selected_city_id);
 ?>
@@ -24,18 +28,16 @@ $selectedCity = App\City::find($selected_city_id);
 <script type='text/javascript'>
 function updateCitySelector(province_id){
     current = {{$selectedCity->id}};
-    var cities = [@foreach(\App\Province::all() as $province) [{{$province->id}},[ @foreach($province->Cities as $city) [{{$city->id}},'{{$city->name}}'], @endforeach ]], @endforeach ]; 
-        
-            
-                
-            
-             
-        
-        
-        
+    var cities = [@foreach(\App\Province::all() as $province)
+        [{{$province->id}},[
+                @foreach($province->Cities as $city)
+                    [{{$city->id}},'{{$city->name}}'],
+                @endforeach ]],
+        @endforeach ]; 
     citySelector = document.getElementById('citySelector');
     citySelector.innerHTML = "";
-    thisProvince = cities[province_id][1];
+    var p = parseInt(province_id)-1;
+    thisProvince = cities[p][1];
     console.log(thisProvince);
     for(var i=0; i<thisProvince.length; i++)
     {

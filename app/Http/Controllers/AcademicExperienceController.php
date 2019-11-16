@@ -45,18 +45,20 @@ class AcademicExperienceController extends Controller
         if(auth()->id()==null){
             return redirect('auth/login');
         }
+        
+       $request['user_id']=auth()->id();
        $request['is_current'] = $request['is_current'] != null;
        $request->validate([
            'school_name'        =>  'required | string',
            'career'             =>  'required | string',
            'started_at'         =>  'required | date',
-           'finished_at'        =>  'date | after:started_at',
+           'finished_at'        =>  'nullable | someteimes | date | after:started_at',
            'is_current'         =>  'boolean',
            'user_id'            =>  'required | integer'
        ]);
         
-        $request['user_id']=auth()->id();
-        AcademicExperience::create(request([
+       
+        $ae=AcademicExperience::create(request([
             'school_name',
             'career',
             'academic_level_id',
@@ -65,7 +67,11 @@ class AcademicExperienceController extends Controller
             'is_current',
             'user_id'
         ]));
-        return redirect('/users/'.auth()->id());
+        if (auth()->user()->UserRole->role == "ADMIN") {
+            return redirect('/users/' . $ae->user_id);
+        } else {
+            return redirect('/home');
+        }
     }
 
     /**

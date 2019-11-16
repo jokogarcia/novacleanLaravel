@@ -20,7 +20,7 @@ class CreateSectorsTable extends Migration
             $table->text("description")->nullable();
             $table->double("area")->nullable();
             $table->bigInteger("location_id")->unsigned();
-            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete("cascade");
             $table->timestamps();
         });
     }

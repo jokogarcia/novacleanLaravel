@@ -1,13 +1,14 @@
 @extends('layouts.novaclean')
 
 @section('content')
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="container">
     <section id="dashboard">
-        <table class="table">
+        <a href="/clients/create">Cargar nuevo cliente</a>
+        <table class="table" id="sortable">
             <tr>
-                <th>Cliente</th>
-                <th>Email</th>
+                <th>Cliente <a href="#" onClick="sortTable('sortable',0)">^</a></th>
+                <th>Email </th>
                 <th>Domicilio</th>
                 <th>Teléfono</th>
                 <th>Acciones</th>
@@ -24,7 +25,8 @@
                     <td>{{$user->phone}}</td>
                     <td>
                         <a href="/users/{{$user->id}}/edit">editar</a> | 
-                        <a href="/users/{{$user->id}}">ver</a> 
+                        <a href="/users/{{$user->id}}">ver</a>  |
+                        <form action="/users/{{$user->id}}" method="POST">@csrf  {{method_field('DELETE')}} <input type="hidden" value="/clients" name="redirectTo"/><button type="submit">Eliminar</button></form>
                     </td>
                 </tr>
             @empty
@@ -35,3 +37,6 @@
 
 </div>
 @endsection
+<script>
+
+</script>
