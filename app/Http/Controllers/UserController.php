@@ -66,7 +66,7 @@ class UserController extends Controller
             'phone'         =>  'string',
             'cuit'          =>  'numeric | unique:users,cuit',
             'user_role_id' =>  'numeric',
-            'employee_start_date'   =>  'nullable | somteimes | date',
+            'employee_start_date'   =>  'nullable | sometimes | date',
             'birth_date'    =>  'date',
             'tcn_state'     =>  'boolean',
             'city_id'       =>  'required | numeric',
@@ -150,7 +150,7 @@ class UserController extends Controller
             'dni'           =>  "unique:users,dni,$_id",
             'phone'           =>  'string',
             'cuit'          => "unique:users,cuit,$_id",
-            'employee_start_date'   =>  'nullable | somteimes | date',
+            'employee_start_date'   =>  'nullable | sometimes | date',
             'birth_date'    =>  'date',
             'city_id'       =>  'required | numeric',
             'photo'         =>  'image | mimes:jpeg,png,jpg,gif|max:2048'
