@@ -142,8 +142,8 @@
 					
 					<div class="col-lg-3 col-sm-5">
                         <div class="footer_item">
-                            <a href="https://www.pactomundial.org"><h4>Pacto Global de la ONU</h4></a>
-                            <!--<a href="https://www.pactomundial.org"><img classs="logo" src="/images/pactoGlobal.svg"/></a> -->
+                            <a href="https://www.pactomundial.org"><h4>Pacto Mundial de la ONU</h4></a>
+                            <a href="https://www.pactomundial.org"><img classs="logo" src="/images/pactoGlobal.svg"/></a> 
 							<p>Adherimos al <a href="https://www.pactomundial.org"><b>Pacto mundial de Naciones Unidas</b></a>. Este es un acuerdo entre empresas de todo el mundo para forjar un compromiso de desarrollo sustentable y protección del medio ambiente. Te invitamos a conocer más haciendo click en el enlace.
                         </div>
                     </div>
