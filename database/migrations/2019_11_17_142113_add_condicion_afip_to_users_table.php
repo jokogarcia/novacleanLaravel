@@ -16,7 +16,7 @@ class AddCondicionAfipToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             //
             $table->bigInteger('condicion_afip_id')->unsigned();
-            $table->foreign('condicion_afip_id')->references('id')->on('condicion_afips')->default(1);
+            //$table->foreign('condicion_afip_id')->references('id')->on('condicion_afips')->default(1);
             
         });
     }
