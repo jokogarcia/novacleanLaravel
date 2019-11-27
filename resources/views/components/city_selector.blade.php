@@ -1,9 +1,6 @@
-/*
-Agregar opcion ordenar alfabeticamente
-y campo condicion impositiva
-hacer que tome la localidad del cliente al crear lugar
-*/<?php
-$selected_city_id = $selected_city_id == null ? 1 : $selected_city_id;
+<?php
+
+$selected_city_id = $selected_city_id == null ? Auth()->user()->city_id : $selected_city_id;
 $selectedCity = App\City::find($selected_city_id);
 ?>
 <div class="form-group">

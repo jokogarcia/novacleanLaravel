@@ -1,6 +1,9 @@
 @extends('layouts.novaclean')
 
 @section('content')
+<?php 
+$defaultCity = old('city_id') ?? \App\User::find(request('user_id'))->first()->city_id;
+?>
 <div class="container">
     <section id="dashboard">
         <div class="container">
@@ -29,7 +32,7 @@
     </div>
 </div>
 
-@component('components.city_selector',['selected_city_id' => old('city_id')]) @endcomponent
+@component('components.city_selector',['selected_city_id' => $defaultCity]) @endcomponent
 <div class="form-group">
     <label class="label text-black" for ="address_street_name">Calle</label>
     <div class="control">

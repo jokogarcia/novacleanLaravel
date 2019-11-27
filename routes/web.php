@@ -50,4 +50,6 @@ Route::resource('/locations', 'LocationController');
 Route::resource('/tasks', 'TaskController');
 Route::resource('/sectors', 'SectorController');
 
+Route::resource('/visit_events','VisitEventController');
+
 Route::get('/work_with_us','WorkWithUsController@show');

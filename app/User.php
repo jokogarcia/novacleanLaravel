@@ -46,6 +46,9 @@ class User extends Authenticatable
     public function UserRole(){
         return $this->belongsTo('App\UserRole');
     }
+    public function CondicionAfip(){
+        return $this->belongsTo('App\CondicionAfip');
+    }
     public function Locations(){
         return $this->hasMany('App\Location','client_id');
     }

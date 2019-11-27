@@ -42,13 +42,13 @@ class LocationController extends Controller
         $request->validate([
             'name'                  =>  'required | string',
             'address_street_name'   =>  'required | string',
-            'address_floor'         =>  'integer',
-            'latitude'              =>  'numeric',
-            'longitude'             =>  'numeric',
+            'address_floor'         =>  'integer|nullable',
+            'latitude'              =>  'numeric|nullable',
+            'longitude'             =>  'numeric|nullable',
             'local_contact_name'    =>  'required | string',
-            'local_contact_email'   =>  'string',
-            'local_contact_phone'   =>  'string',
-            'contract_number'       =>  'numeric',
+            'local_contact_email'   =>  'string|nullable',
+            'local_contact_phone'   =>  'string|nullable',
+            'contract_number'       =>  'numeric|nullable',
             'supervisor_id'         =>  'required | numeric',
             'client_id'             =>  'required | numeric',
             'city_id'               =>  'required | numeric'
@@ -71,7 +71,8 @@ class LocationController extends Controller
             'city_id'
 
         ]));
-        return redirect('/users/'.$location->user_id.'#location'.$location->id);
+
+        return redirect('/users/'.$location->client_id.'#location'.$location->id);
     }
 
     /**
@@ -111,16 +112,15 @@ class LocationController extends Controller
         $request->validate([
             'name'                  =>  'required | string',
             'address_street_name'   =>  'required | string',
-            'address_floor'         =>  'integer',
-            'latitude'              =>  'numeric',
-            'longitude'             =>  'numeric',
-            'local_contact_name'    =>  'required | string',
-            'local_contact_email'   =>  'string',
-            'local_contact_phone'   =>  'string',
-            'contract_number'       =>  'numeric',
-            'supervisor_id'         =>  'required | numeric',
-            'client_id'             =>  'required | numeric',
-            'city_id'               =>  'required | numeric'
+            'address_floor'         =>  'integer|nullable',
+            'latitude'              =>  'numeric|nullable',
+            'longitude'             =>  'numeric|nullable',
+            'local_contact_name'    =>  'required|string',
+            'local_contact_email'   =>  'string|nullable',
+            'local_contact_phone'   =>  'string|nullable',
+            'contract_number'       =>  'numeric|nullable',
+            'supervisor_id'         =>  'required|numeric',
+            'city_id'               =>  'required|numeric'
         ]);
         $location->update(request([
             'name',
@@ -138,7 +138,7 @@ class LocationController extends Controller
             'supervisor_id',
             'city_id'
         ]));
-        return redirect('/users/'.$location->user_id.'#location'.$location->id);
+        return redirect('/users/'.$location->client_id.'#location'.$location->id);
     }
 
     /**

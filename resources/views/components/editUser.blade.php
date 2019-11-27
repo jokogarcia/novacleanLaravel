@@ -27,7 +27,6 @@
         <div class="control">
             <input name="last_name"
               class="input wide @error('last_name') is-error @enderror"
-              required
               value="{{$user->last_name}}"
             />
             @error('last_name')
@@ -69,13 +68,21 @@
         </div>
     </div>
     @component('components.city_selector',['selected_city_id' => $user->city_id]) @endcomponent
-
+<script type="text/javascript" src="/js/cuit_builder.js"></script>
+        <script type="text/javascript">
+            function makeCuit(){
+                var dni = document.getElementsByName("dni")[0].value;
+                var sexo = document.querySelector('input[name="gender"]:checked').value
+                var cuit = get_cuil_cuit(dni,sexo);
+                document.getElementsByName("cuit")[0].value=cuit;
+            }
+        </script>
     <div class="form-group">
         <label class="label text-black" for ="dni">DNI</label>
         <div class="control">
             <input name="dni"
               class="input wide @error('dni') is-error @enderror"
-              required
+              onchange="makeCuit()"
               value="{{$user->dni}}"
             />
             @error('dni')
@@ -85,7 +92,12 @@
             @enderror
         </div>
     </div>
-
+<input type="radio" id="genderm" name="gender" onchange="makeCuit()" value="HOMBRE" />
+        <label for="genderm">Masculino</label>
+        <input type="radio" id="genderf" name="gender" onchange="makeCuit()" value="MUJER" />
+        <label for="genderf">Femenino</label>
+        <input type="radio" id="genderp" name="gender" onchange="makeCuit()" value="SOCIEDAD" />
+        <label for="genderp">Persona Jurídica</label>
 
     <div class="form-group">
         <label class="label text-black" for ="cuit">CUIL / CUIT (Opcional)</label>
@@ -101,6 +113,7 @@
             @enderror
         </div>
     </div>
+    @component('components.condicion_afip_id_selector',['currentSelectedValue' => $user->condicion_afip_id]) @endcomponent
 
 
     <div class="form-group">

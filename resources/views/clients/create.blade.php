@@ -102,11 +102,21 @@ $userAuth = \App\User::with("UserRole")->find(auth()->id());
         </div>
         @component('components.city_selector',['selected_city_id' => old('selected_city_id')]) @endcomponent
 
+        <script type="text/javascript" src="/js/cuit_builder.js"></script>
+        <script type="text/javascript">
+            function makeCuit(){
+                var dni = document.getElementsByName("dni")[0].value;
+                var sexo = document.querySelector('input[name="gender"]:checked').value
+                var cuit = get_cuil_cuit(dni,sexo);
+                document.getElementsByName("cuit")[0].value=cuit;
+            }
+        </script>
         <div class="form-group">
             <label class="label text-black" for ="dni">DNI</label>
             <div class="control">
                 <input name="dni"
                   class="input wide @error('dni') is-error @enderror"
+                  onchange="makeCuit()"
                   value="{{old('dni')}}"
                 />
                 @error('dni')
@@ -116,6 +126,12 @@ $userAuth = \App\User::with("UserRole")->find(auth()->id());
                 @enderror
             </div>
         </div>
+        <input type="radio" id="genderm" name="gender" onchange="makeCuit()" value="HOMBRE" />
+        <label for="genderm">Masculino</label>
+        <input type="radio" id="genderf" name="gender" onchange="makeCuit()" value="MUJER" />
+        <label for="genderf">Femenino</label>
+        <input type="radio" id="genderp" name="gender" onchange="makeCuit()" value="SOCIEDAD" />
+        <label for="genderp">Persona Jurídica</label>
 
 
         <div class="form-group">
@@ -132,6 +148,7 @@ $userAuth = \App\User::with("UserRole")->find(auth()->id());
                 @enderror
             </div>
         </div>
+        @component('components.condicion_afip_id_selector',['currentSelectedValue' => old('condicion_afip_id')])) @endcomponent
 
 
         <div class="form-group">

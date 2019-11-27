@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="title"><h2>Editar tarea</h2></div>
+                    <div class="title"><h2>Crear tarea</h2></div>
                 </div>
                 <div class="col-md-4">
                     <form action="/tasks" method="POST">
@@ -16,7 +16,7 @@
 
 
 <div class="form-group">
-    <label class="label text-black" for ="duration">Duración</label>
+    <label class="label text-black" for ="duration">Duración [horas:minutos]</label>
     <div class="control">
         <input name="duration"
           type='time'

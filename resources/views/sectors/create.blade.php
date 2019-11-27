@@ -49,7 +49,7 @@
 
 
 <div class="form-group">
-    <label class="label text-black" for ="area">Superficie</label>
+    <label class="label text-black" for ="area">Superficie [m<sup>2</sup>]</label>
     <div class="control">
         <input name="area"
           type='number'  step='0.01'

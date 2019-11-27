@@ -103,6 +103,8 @@ class TaskController extends Controller
     {
         //
         auth()->user()->hasAnyRole(['ADMIN','SUPERVISOR']);
+        $location_id = $task->Sector->Location->id;
         $task->delete();
+        return redirect('/locations/'.$location_id);
     }
 }

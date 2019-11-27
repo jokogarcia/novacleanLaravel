@@ -28,6 +28,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('raitings/','RaitingController@ApiStore');
 
     Route::get('locations/{location}','LocationController@ApiShow');
+    Route::post('/visit_events/{visit_event}/attachTask/{task_id}','VisitEventController@ApiAttachTask');
+    Route::post('/visit_events/{visit_event}/detachTask/{task_id}','VisitEventController@ApiDetachTask');
+    Route::post('/attendance_log/','AttendanceLogController@store');
 });
 
 

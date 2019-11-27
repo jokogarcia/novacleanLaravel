@@ -99,30 +99,3 @@ function sortTable(tableId,rowN) {
 
 
 
-function callDelete(route,id,csrfToken){
-    if(confirm("Está por eliminar este recurso. ¿Está seguro?")){
-        
-    }
-    var url = "http://novaclean.test/users/"+id;
-    fetch(url, {
-        method: 'delete',
-        headers: {
-        'X-CSRF-TOKEN': csrfToken
-    }
-        
-        
-         
-},).then(function(value) {
-   if(value.ok){
-       window.location.reload(true); 
-   }
-   else{
-       var valuestr = JSON.stringify(value);
-       alert("Ocurrió un error. URL:"+url+"\nStatus: "+value.status);
-       
-   }
-  }, function(reason) {
-    alert("Error de red: "+reason.message);
-  // rechazo
-});
-}

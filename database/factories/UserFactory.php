@@ -36,22 +36,26 @@ $factory->define(User::class, function (Faker $faker) {
         'phone' => $faker->phoneNumber,
         'user_role_id' => 1,
         'birth_date' => $faker->date,
-        'city_id' => 1421
+        'city_id' => 1421,
+        'condicion_afip_id' => 2
     ];
 });
 $factory->state(User::class, 'client', [
     'user_role_id' => 2,
+    'condicion_afip_id' => 2
 ]);
 
 $factory->state(User::class, 'employee', function ($faker) {
     return[
         'user_role_id' => 3,
+        'condicion_afip_id' => 7
     ];
 });
 
 $factory->state(User::class, 'supervisor', function ($faker) {
     return[
         'user_role_id' => 4,
+        'condicion_afip_id' => 7
     ];
 });
 
@@ -62,6 +66,6 @@ $factory->state(User::class, 'admin', function ($faker) {
         'name' => "Emilio",
         'last_name' => "Escudero",
         'phone' => "3804489101",
-        'user_role_id' => 1,
+        'condicion_afip_id' => 2
     ];
 });

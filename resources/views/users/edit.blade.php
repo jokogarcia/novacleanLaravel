@@ -14,6 +14,8 @@ if($user==null){
 } else {
     $user = \App\User::with("UserRole")->find($user->id);
 }
+$redirectURL = "/users/$user->id";
+
 ?>
 <div class="container">
     <section id="dashboard">
@@ -22,7 +24,7 @@ if($user==null){
                 <div class="col-md-4">
                     <div class="title"><h2>Editar Usuario</h2></div>
                 </div>
-                @component('components.editUser',['user'=>$user])
+                @component('components.editUser',['user'=>$user,'redirectTo'=>$redirectURL])
                 @endcomponent
                
             </div>

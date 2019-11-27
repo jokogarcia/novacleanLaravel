@@ -14,7 +14,7 @@
                         @method('patch')
 
 <div class="form-group">
-    <label class="label text-black" for ="duration">Duración</label>
+    <label class="label text-black" for ="duration">Duración [horas:minutos]</label>
     <div class="control">
         <input name="duration"
           type='time'

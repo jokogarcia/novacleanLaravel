@@ -59,18 +59,19 @@ class UserController extends Controller
         auth()->user()->hasAnyRole(['ADMIN','SUPERVISOR']);
         $request->validate([
             'name'          =>  'required | string',
-            'last_name'     =>  'string',
+            'last_name'     =>  'string | nullable',
             'email'         =>  'string | unique:users,email',
             'password'      =>  'string | required',
-            'dni'           =>  'unique:users,dni| numeric',
-            'phone'         =>  'string',
-            'cuit'          =>  'numeric | unique:users,cuit',
+            'dni'           =>  'unique:users,dni| numeric | nullable',
+            'phone'         =>  'string | nullable',
+            'cuit'          =>  'numeric | unique:users,cuit| nullable',
             'user_role_id' =>  'numeric',
             'employee_start_date'   =>  'nullable | sometimes | date',
-            'birth_date'    =>  'date',
+            'birth_date'    =>  'date | nullable',
             'tcn_state'     =>  'boolean',
             'city_id'       =>  'required | numeric',
-            'photo'         =>  'image | mimes:jpeg,png,jpg,gif|max:2048'
+            'photo'         =>  'image | mimes:jpeg,png,jpg,gif|max:2048 | nullable',
+            'condicion_afip_id' => 'numeric'
             
         ]);
         
@@ -87,6 +88,7 @@ class UserController extends Controller
             'employee_start_date',
             'city_id',
             'user_role_id',
+            'condicion_afip_id'
         ]));
        if($request->has('photo')){
             $image = $request->file('photo');
@@ -145,15 +147,16 @@ class UserController extends Controller
         $_id= intval($user->id);
         $request->validate([
             'name'           =>  'required | string',
-            'last_name'      =>  'string',
+            'last_name'      =>  'string | nullable',
             'email'          =>  "string | unique:users,email,$_id",
-            'dni'           =>  "unique:users,dni,$_id",
-            'phone'           =>  'string',
-            'cuit'          => "unique:users,cuit,$_id",
+            'dni'           =>  "unique:users,dni,$_id | nullable",
+            'phone'           =>  'string | nullable',
+            'cuit'          => "unique:users,cuit,$_id | nullable",
             'employee_start_date'   =>  'nullable | sometimes | date',
-            'birth_date'    =>  'date',
+            'birth_date'    =>  'date | nullable',
             'city_id'       =>  'required | numeric',
-            'photo'         =>  'image | mimes:jpeg,png,jpg,gif|max:2048'
+            'photo'         =>  'image | mimes:jpeg,png,jpg,gif|max:2048 | nullable',
+            'condicion_afip_id' => 'numeric'
             
         ]);
         
@@ -176,14 +179,16 @@ class UserController extends Controller
             'employee_start_date',
             'birth_date',
             'city_id',
-            'photo_url'
+            'photo_url',
+            'condicion_afip_id'
         ]));
         switch($request['redirectTo']){
-            default:
+            case '':
                 return redirect('/home');
             case 'work_with_us':
                 $user->update(['tcn_state'=>1]);
                 return redirect('/work_with_us');
+            default: return redirect($request['redirectTo']);
                     
         }
         

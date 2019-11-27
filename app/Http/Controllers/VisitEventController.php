@@ -26,6 +26,8 @@ class VisitEventController extends Controller
     public function create()
     {
         //
+        auth()->user()->hasAnyRole(['ADMIN','SUPERVISOR']);
+        return view('/visit_events/create');
     }
 
     /**
@@ -36,14 +38,21 @@ class VisitEventController extends Controller
      */
     public function store(Request $request)
     {
-        
         auth()->user()->hasAnyRole(['ADMIN','SUPERVISOR']);
+        $request['repeats'] = $request['repeats']=='on';
+        $request['monday'] = $request['monday']=='on';
+        $request['wednesday'] = $request['wednesday']=='on';
+        $request['tuesday'] = $request['tuesday']=='on';
+        $request['thursday'] = $request['thursday']=='on';
+        $request['friday'] = $request['friday']=='on';
+        $request['saturday'] = $request['saturday']=='on';
+        $request['sunday'] = $request['sunday']=='on';
+        
         $request->validate([
             'location_id'           =>  'required | numeric',
-            'starts_at'             =>  'required | time',
-            'duration'              =>   'required | time',
-            'date'                  =>  'date',
-            'starting_date'         =>  'date',
+            'starts_at'             =>  'required | date_format:H:i',
+            'duration'              =>  'required | date_format:H:i',
+            'date'                  =>  'date|required',
             'repeats'               =>  'boolean',
             'monday'                =>  'boolean',
             'tuesday'               =>  'boolean',
@@ -53,8 +62,8 @@ class VisitEventController extends Controller
             'saturday'              =>  'boolean',
             'sunday'                =>  'boolean'
         ]);
-
-        $visitEvent = App\User::create(request([
+        $request['starting_date'] = $request['date'];
+        $visitEvent = \App\VisitEvent::create(request([
             'location_id',
             'starts_at',
             'duration',
@@ -69,10 +78,16 @@ class VisitEventController extends Controller
             'saturday',
             'sunday'
         ]));
+        $tasks = explode(',',request('taskList'));
+        $visitEvent->Tasks()->attach($tasks);
+
+        
         return redirect('/locations/'.$visitEvent->location_id);
     }
 
-    
+    public function Show(VisitEvent $visitEvent){
+        return view('/visit_events/show',compact('visitEvent'));
+    }
     public function ApiShow(VisitEvent $visitEvent){
         return $visitEvent;
     }
@@ -86,11 +101,19 @@ class VisitEventController extends Controller
     public function update(Request $request, VisitEvent $visitEvent)
     {
         auth()->user()->hasAnyRole(['ADMIN','SUPERVISOR']);
+         $request['repeats'] = $request['repeats']=='on';
+        $request['monday'] = $request['monday']=='on';
+        $request['wednesday'] = $request['wednesday']=='on';
+        $request['tuesday'] = $request['tuesday']=='on';
+        $request['thursday'] = $request['thursday']=='on';
+        $request['friday'] = $request['friday']=='on';
+        $request['saturday'] = $request['saturday']=='on';
+        $request['sunday'] = $request['sunday']=='on';
         $request->validate([
-            'starts_at'             =>  'required | time',
-            'duration'              =>   'required | time',
-            'date'                  =>  'date',
-            'starting_date'         =>  'date',
+            'starts_at'             =>  'required |date_format:H:i',
+            'duration'              =>   'required |date_format:H:i',
+            'date'                  =>  'date|nullable',
+            'starting_date'         =>  'date|nullable',
             'repeats'               =>  'boolean',
             'monday'                =>  'boolean',
             'tuesday'               =>  'boolean',
@@ -128,7 +151,25 @@ class VisitEventController extends Controller
     public function destroy(VisitEvent $visitEvent)
     {
         //
+        $location_id = $visitEvent->Location->id;
         auth()->user()->hasAnyRole(['ADMIN','SUPERVISOR']);
         $visitEvent->delete();
+        return redirect('/locations/'.$location_id);
+    }
+    public function ApiAttachTask(Request $request, VisitEvent $visitEvent){
+        $taskId=$request['task_id'];
+        $visitEvent->Tasks->attach($taskId);
+    }
+    public function ApiDetachTask(Request $request, VisitEvent $visitEvent){
+        $taskId=$request['task_id'];
+        $visitEvent->Tasks->detach($taskId);
+    }
+    public function ApiAttachEmployee(Request $request, VisitEvent $visitEvent){
+        $taskId=$request['employee_id'];
+        $visitEvent->Tasks->attach($taskId);
+    }
+    public function ApiDetachEmployee(Request $request, VisitEvent $visitEvent){
+        $taskId=$request['employee_id'];
+        $visitEvent->Tasks->detach($taskId);
     }
 }

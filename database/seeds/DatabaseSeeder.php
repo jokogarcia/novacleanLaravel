@@ -25,7 +25,9 @@ class DatabaseSeeder extends Seeder {
         \App\AcademicLevel::create(['level_name' => 'PROFESORADO']);
         \App\AcademicLevel::create(['level_name' => 'TERCIARIO']);
         \App\AcademicLevel::create(['level_name' => 'GRADO']);
-
+        
+        
+        
 
         //\App\User::truncate();
         $adminUser = factory(\App\User::class)->state("admin")->create();

@@ -12,6 +12,7 @@
                     <form action="/locations/{{$location->id}}" method="POST">
                         @csrf
                         @method('patch')
+                       
 
 <div class="form-group">
     <label class="label text-black" for ="name">Nombre</label>
@@ -109,7 +110,7 @@
         <input name="latitude"
           type='number'
           class="input wide @error('latitude') is-error @enderror"
-          required
+          
           value="{{$location->latitude}}"
         />
         @error('latitude')
@@ -127,7 +128,7 @@
         <input name="longitude"
           type='number'
           class="input wide @error('longitude') is-error @enderror"
-          required
+          
           value="{{$location->longitude}}"
         />
         @error('longitude')
@@ -163,7 +164,7 @@
         <input name="local_contact_email"
           type='email'
           class="input wide @error('local_contact_email') is-error @enderror"
-          required
+          
           value="{{$location->local_contact_email}}"
         />
         @error('local_contact_email')
@@ -181,7 +182,7 @@
         <input name="local_contact_phone"
           type='tel'
           class="input wide @error('local_contact_phone') is-error @enderror"
-          required
+          
           value="{{$location->local_contact_phone}}"
         />
         @error('local_contact_phone')
@@ -199,7 +200,7 @@
         <input name="contract_number"
           type='number'
           class="input wide @error('contract_number') is-error @enderror"
-          required
+          
           value="{{$location->contract_number}}"
         />
         @error('contract_number')
@@ -249,6 +250,8 @@
             </div>
         </div>
     </section>
-
+@if ($errors->any())
+        {{ implode('', $errors->all('<div>:message</div>')) }}
+@endif
 </div>
 @endsection

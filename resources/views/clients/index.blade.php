@@ -24,9 +24,9 @@
                     <td>-</td>
                     <td>{{$user->phone}}</td>
                     <td>
-                        <a href="/users/{{$user->id}}/edit">editar</a> | 
-                        <a href="/users/{{$user->id}}">ver</a>  |
-                        <form action="/users/{{$user->id}}" method="POST">@csrf  {{method_field('DELETE')}} <input type="hidden" value="/clients" name="redirectTo"/><button type="submit">Eliminar</button></form>
+                        <a href="/users/{{$user->id}}/edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
+                        <a href="/users/{{$user->id}}"><i class="fa fa-eye" aria-hidden="true"></i></a>  |
+                        @component('components.deleteLink',['route' => 'users', 'id'=>$user->id]) @endcomponent
                     </td>
                 </tr>
             @empty

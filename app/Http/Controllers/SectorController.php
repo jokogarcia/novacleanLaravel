@@ -117,6 +117,8 @@ class SectorController extends Controller
     {
         //
         auth()->user()->hasAnyRole(['ADMIN','SUPERVISOR']);
+        $location_id = $sector->location_id;
         $sector->delete();
+        return redirect('/locations/'.$location_id);
     }
 }
