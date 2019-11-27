@@ -172,4 +172,12 @@ class VisitEventController extends Controller
         $taskId=$request['employee_id'];
         $visitEvent->Tasks->detach($taskId);
     }
+    public function edit(VisitEvent $visitEvent)
+    {
+        //
+        
+        auth()->user()->hasAnyRole(['ADMIN','SUPERVISOR']);
+        
+        return view('/visit_events/edit', compact('visitEvent'));
+    }
 }

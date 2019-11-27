@@ -25,6 +25,15 @@ class VisitEvent extends Model
         return $this->belongsToMany('App\User','employee_visit_event',
                 'visit_event_id','employee_id');
     }
+    public function HasTask(\App\Task $task){
+        //dd($this->Tasks->ToArray());
+        $taskid=$task->id;
+        $n = $this->Tasks->where('id','=',$taskid);
+        if($n->Count()>0){
+            return true;
+        }
+        return false;
+    }
     public function Days(){
         if(!$this->repeats){
             return date($this->date);
