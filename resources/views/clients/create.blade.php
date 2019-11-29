@@ -19,7 +19,7 @@ $userAuth = \App\User::with("UserRole")->find(auth()->id());
                     <div class="title"><h2>Crear Cliente</h2></div>
                 </div>
                 <div class="col-md-4">
-    <form action="/users/" method="POST" enctype="multipart/form-data">
+    <form action="/users" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label class="label text-black" for ="name">Nombre</label>

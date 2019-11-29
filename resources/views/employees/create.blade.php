@@ -21,7 +21,7 @@ $altaDefault = old('employee_start_date')==null ? date('Y-m-d') : old('employee_
                     <div class="title"><h2>Crear Empleado</h2></div>
                 </div>
                 <div class="col-md-4">
-    <form action="/users/" method="POST" enctype="multipart/form-data">
+    <form action="/users" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label class="label text-black" for ="name">Nombre</label>
